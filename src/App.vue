@@ -1,17 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul>
+      <a @mouseover="hoverOver('Products')" @mouseleave="hoverOver('')"><li>Products</li></a>
+      <a><li>Developers</li></a>
+      <a><li>Company</li></a>
+    </ul>
+    <Products v-if="hoveredTab === 'Products'"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Products from './components/Products'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      tabs: ['Products', 'Developers', 'Company'],
+      hoveredTab: ''
+    }
+  },
   components: {
-    HelloWorld
+    Products
+  },
+  methods: {
+    hoverOver(tab) {
+      this.hoveredTab = tab;
+    }
   }
 }
 </script>
@@ -24,5 +40,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+li {
+  display: inline-block;
+  padding: 10px;
+}
+
+a {
+  cursor: pointer;
 }
 </style>
